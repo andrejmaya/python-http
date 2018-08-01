@@ -13,10 +13,9 @@ class MyHandler(BaseHTTPRequestHandler):
     self.end_headers()
 
     print(self.wfile)
-    self.wfile.write("<html><head><title>awesome app.</title></head>")
-    self.wfile.write("<body><p>This is my awesome app.</p>")
-    self.wfile.write("<p>You accessed path: %s</p>" % self.path)
-    self.wfile.write("</body></html>")
+
+    content = "<html><body><p>This is my awesome app.</p></body></html>"
+    self.wfile.write(bytes(content, 'utf-8'))
     self.wfile.close()
     """
     with open('logo.png', 'rb') as f:
