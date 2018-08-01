@@ -9,10 +9,19 @@ class MyHandler(BaseHTTPRequestHandler):
   def do_GET(self):
     """Handler for GET requests"""
     self.send_response(200)
-    self.send_header('Content-type','image/png')
+    self.send_header('Content-type','text/html')
     self.end_headers()
+
+    print(self.wfile)
+    self.wfile.write("<html><head><title>awesome app.</title></head>")
+    self.wfile.write("<body><p>This is my awesome app.</p>")
+    self.wfile.write("<p>You accessed path: %s</p>" % self.path)
+    self.wfile.write("</body></html>")
+    self.wfile.close()
+    """
     with open('logo.png', 'rb') as f:
       self.wfile.write(f.read())
+    """
 
 try:
   server = HTTPServer(('', PORT_NUMBER), MyHandler)
